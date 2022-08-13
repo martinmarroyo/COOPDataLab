@@ -1,0 +1,62 @@
+version: '3'
+services:
+# Python Development Environment
+    python-env:
+        image: marroyo777/coop-da-python:0.3
+        container_name: coop-da-python
+        working_dir: /src/python-env
+        volumes:
+            - ./development:/src/python-env/development
+            - ./data:/src/python-env/data
+        ports:
+            - "8008:8888"
+        networks:
+            - coop-da
+# Relational Database/Data Warehouse
+    database:
+        image: postgres:13
+        container_name: coop-database
+        env_file:
+            - environment
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        healthcheck:
+            test: [ "CMD", "pg_isready", "-U", "coop-da"]
+            interval: 5s
+            retries: 5
+        restart: always
+        ports:
+            - "55432:5432"
+        networks:
+            - coop-da
+# Client Application for Database Management
+    pgadmin:
+        image: dpage/pgadmin4:6.10
+        container_name: pgadmin4_container
+        restart: always
+        env_file:
+            - environment
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        ports:
+            - "8080:80"
+        networks:
+            - coop-da
+# Business Intelligence/Dashboarding Tool
+    dashboard:
+        image: metabase/metabase
+        container_name: dashboard
+        env_file:
+            - environment
+        volumes:
+            - metabase-data:/metabase-data
+        ports:
+            - "3000:3000"
+        networks:
+            - coop-da
+networks:
+    coop-da:
+volumes:
+    pgadmin-data: 
+    postgres-data: 
+    metabase-data: 
