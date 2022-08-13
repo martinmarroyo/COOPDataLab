@@ -39,7 +39,7 @@ services:
         volumes:
             - pgadmin-data:/var/lib/pgadmin
         ports:
-            - "8080:80"
+            - "8877:80"
         networks:
             - coop-da
 # Business Intelligence/Dashboarding Tool
