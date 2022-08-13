@@ -6,7 +6,7 @@ PWD
 CD ..
 START /B /WAIT CMD /c "docker compose -f %cd%\DataLab\config\docker-compose.yml up -d"
 REM Start Jupyter Environment
-docker exec -it -d coop-da-python jupyter-notebook --ip 0.0.0.0 --no-browser --allow-root
+docker exec -it -d python-da-env jupyter-notebook --ip 0.0.0.0 --no-browser --allow-root
 REM Show links to resources
 ECHO:
 ECHO:
