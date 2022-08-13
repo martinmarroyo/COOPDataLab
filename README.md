@@ -1,7 +1,5 @@
 # COOP DataLab
 
-A curated, open source, data analytics laboratory
-
 ## What is the COOP DataLab? 
 
 The COOP DataLab is a curated, open source, data analytics laboratory complete with: 
