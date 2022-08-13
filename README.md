@@ -1,4 +1,5 @@
-# COOP DataLab
+![DataLab](https://lh3.googleusercontent.com/9VlN0kTNct88mIcNTE26_SIkcOk2WCbSY8aPy9Wo76sUv3L1x9SymrTBnRWZ2XvFNg79WN-09jfZp6ULnMv0oFcUYwS_ndofCLibunYmD-bCa_xbEz9n9ywP3JQqe_NWUkIEHXF2DQ=w2400)
+
 A curated, open source, data analytics laboratory
 
 ## What is the COOP DataLab? 
