@@ -1,9 +1,9 @@
 #!/bin/bash
 echo Starting DataLab
-docker compose -f ../DataLab/config/docker-compose.yml up -d
+docker compose -f ../DataLab/docker-compose.yml up -d
 # Start Jupyter Environment
 wait
-docker exec -it -d python-da-env jupyter-notebook --ip 0.0.0.0 --no-browser --allow-root
+docker exec -it -d pydev jupyter-notebook --ip 0.0.0.0 --no-browser --allow-root
 cat ../DataLab/config/welcome.txt
 # Show links to resources
 echo Welcome to DataLab, $USER!
