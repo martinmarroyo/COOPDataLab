@@ -5,8 +5,8 @@ services:
         image: marroyo777/datalab-py:0.1
         container_name: pydev
         volumes:
-            - ./datalab-py/src:/src/python-env/development
-            - ./DataLab-DB/data:/src/python-env/data
+            - ./datalab-py/src:/opt/src
+            - ./datalab-db/data:/opt/src/data
         ports:
             - "8008:8888"
         networks:
@@ -28,7 +28,7 @@ services:
             - local
 # Client Application for Database Management
     dbadmin:
-        image: marroyo777/datalab-dbadmin:0.1
+        image: marroyo777/datalab-dbadmin:0.2
         container_name: dbadmin
         restart: always
         volumes:

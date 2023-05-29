@@ -66,3 +66,84 @@ chmod +x launch-datalab.sh
 ```bash
 docker compose up -d
 ```
+
+## Available Services (Default)
+
+### **Python/Jupyter Notebook**
+
+#### Description
+This is a Python environment that also runs a Jupyter Notebook server. It has common data analytics libraries already installed on it, like pandas, numpy, matplotlib, sci-kit learn, and seaborn. You can either write code in the Jupyter Notebook UI through your browser, or place source code in the `datalab-py/src` folder - anything put in this folder will also show on the container. Likewise, anything you do inside of the container in that folder will be available on your local machine. Anything that you create inside of the container that is not within the `src` folder will **not** persist after the container is shut down. So keep the work that you want to save in the `datalab-py/src` folder! 
+
+There are also `csv` files on the container in the `src/data` folder that you can use. These are the same files used to populate the database.
+
+Note: The `src` folder will be created automatically after you startup DataLab the first time.
+
+#### Access
+**Access the Jupyter Notebook UI**: http://localhost:8008/tree?token=datalab
+
+**Enter the container terminal:**
+```bash
+docker exec -it pydev bash
+```
+
+**Start a Python shell:**
+```bash
+docker exec -it pydev python
+```
+
+### **Database/Postgres and Database Admin/pgAdmin**
+
+#### Description
+This is a Postgres (version 15) database that has some data preloaded into it. You can find the raw data in the `datalab-db/data` folder. There are several ways to interact with the data which will be covered in the next section. The `datalab-dbadmin` container is an instance of `pgAdmin` that is pre-configured with a connection to the database already.
+
+#### Access
+You have several options for accessing the data in the database:
+
+**Use the `datalab-dbadmin` container (`pgAdmin`):**
+
+- In your browser, go to http://localhost:8080
+- Log in to pgAdmin:
+```
+Username: admin@datalab.com
+Password: datalab
+```
+- On the left-hand side of the screen, under `Object Explorer`, you will see a group labeled `DL-Group 1`. Click on the arrow to trigger the dropdown menu, then select the `DataLab-DB` database. You will be prompted for a password, which is **`datalab`**. You can select the `Save Password` option so that you don't need to enter it again.
+
+**Connect from a container defined in the `docker-compose.yaml` file:**
+
+To connect to the database from any of the containers defined in DataLab (e.g. the Python container) use the following connection parameters:
+```
+Host: db
+Port: 5432
+Database Name: datalab-db
+Username: datalab
+Password: datalab
+```
+
+**Use a tool that is on your local machine:**
+
+If you have a local installation of a tool like pgAdmin or DBeaver and you want to connect to the database, use the following parameters:
+```
+Host: localhost
+Port: 5432
+Database Name: datalab-db
+Username: datalab
+Password: datalab
+```
+
+### **Metabase**
+
+#### Description
+This is an instance of [Metabase](https://www.metabase.com/docs/latest/), which is an open source business intelligence/data visualization tool. It can connect directly to the DataLab database, query data, and create visualizations - all in one place. This optional tool was included for convenience and to also simulate other paid tools that are commonly used in the industry to try to replicate a similar workflow.
+
+#### Access
+In your browser, go to http://localhost:3000 
+
+When you go to the Metabase instance for the first time, you will have to create an account and connect to the database. Follow the prompts to create your account, and when you come to the point where you can add a database connection, choose the `Postgresql` driver and use the following configuration to establish the connection:
+```
+Host: db
+Port: 5432
+Database Name: datalab-db
+Username: datalab
+Password: datalab
+```
