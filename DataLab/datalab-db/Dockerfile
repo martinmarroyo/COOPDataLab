@@ -6,4 +6,4 @@ ENV POSTGRES_DB=datalab-db
 # Move data into container
 COPY data /opt/data
 # Load data into db
-COPY data/ingest.sh /docker-entrypoint-initdb.d/
+COPY ingest.sh /docker-entrypoint-initdb.d/

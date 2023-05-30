@@ -4,7 +4,7 @@
 SCHEMA_CHECK="SELECT CASE WHEN EXISTS(SELECT schema_name FROM information_schema.schemata WHERE schema_name IN ('anime', 'exoplanet')) THEN 1 ELSE 0 END AS exist"
 if [ $( psql -qtAX -d datalab-db -U datalab -c "${SCHEMA_CHECK}") -eq 1 ]
     then
-        echo "Data already loaded. Entering shell..."
+        echo "Data already loaded. Continuing..."
         exit 0
     else 
         echo "Database is empty. Beginning ingestion..."
